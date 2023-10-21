@@ -6,6 +6,7 @@ import numpy as np
 from tensorflow.keras import backend as K
 from gradcam_utils import grad_cam
 from integrated_gradients_utils import compute_and_visualize_integrated_gradients
+from lime_utils_1 import compute_and_visualize_lime  # Replace with your actual function name
 
 
 app = Flask(__name__)
@@ -65,8 +66,11 @@ def upload():
         # Compute and visualize integrated gradients
         compute_and_visualize_integrated_gradients(img_path, model)
 
+        # Generate LIME explanation
+        compute_and_visualize_lime(img_path, model)
+        # lime_explanation = generate_lime_explanation(img_path, model)  # Replace with your actual function name
+        # print(p, lime_explanation)
         
-        # return render_template('index.html', prediction=str(p).lower(), grad_cam_image='static/grad_cam_result.png')
     print(p)
     return str(p).lower()
 
