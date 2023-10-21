@@ -70,9 +70,8 @@ def upload():
         compute_and_visualize_lime(img_path, model)
         # lime_explanation = generate_lime_explanation(img_path, model)  # Replace with your actual function name
         # print(p, lime_explanation)
-        
-    print(p)
-    return str(p).lower()
+        print(p)
+        return str(p).lower()
 
 
 if __name__ == '__main__':

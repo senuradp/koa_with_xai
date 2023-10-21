@@ -9,6 +9,8 @@ import numpy as np
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from lime import lime_image
 from skimage.segmentation import mark_boundaries
+import matplotlib
+matplotlib.use("Agg") 
 import matplotlib.pyplot as plt
 import cv2
 
@@ -169,8 +171,6 @@ def compute_and_visualize_lime(image_path, model):
 
 
 ################################################ Segment Marking ################################################ 
-
-    # Fetch the segments used in the explanation
     segments = explanation.segments
 
     # Fetch explanation for the top class
@@ -185,6 +185,9 @@ def compute_and_visualize_lime(image_path, model):
     # Create an image to display
     highlighted_img = temp / 2 + 0.5  # Convert the image back to the [0, 1] range
 
+    # Create a figure and axes
+    fig, ax = plt.subplots()
+
     # Loop through each unique segment index
     for segment_index in positive_areas:
         # Create a mask for the current segment index
@@ -197,15 +200,15 @@ def compute_and_visualize_lime(image_path, model):
         centroid = coords.mean(axis=0)
         
         # Annotate the image with the segment index
-        plt.text(centroid[1], centroid[0], str(segment_index), color='white', fontsize=12, ha='center', va='center')
+        ax.text(centroid[1], centroid[0], str(segment_index), color='white', fontsize=12, ha='center', va='center')
 
-    # Display the image and annotations
-    # plt.imshow(highlighted_img)
-    # plt.axis('off')
-    # plt.show()
+    # Display the image and annotations on the axes
+    ax.imshow(highlighted_img)
+    ax.axis('off')
 
-    # Convert the image from [0,1] to [0,255] and to uint8
-    highlighted_image_uint8 = (highlighted_img * 255).astype('uint8')
+    # Save the image using matplotlib's savefig
+    save_path = f'lime_outputs/lime_3_{image_path.split("/")[-1]}'
+    fig.savefig(save_path, bbox_inches='tight', pad_inches=0)
 
-    # Save the image using OpenCV (note the conversion from RGB to BGR)
-    cv2.imwrite(f'lime_outputs/lime_3_{image_path.split("/")[-1]}', cv2.cvtColor(highlighted_image_uint8, cv2.COLOR_RGB2BGR))
+    # Close the figure to free up memory
+    plt.close(fig)
