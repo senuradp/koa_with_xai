@@ -3,29 +3,39 @@
 /* -----------------------------------------------------------------------*/
 
 * {
-    margin: auto;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    background-color: #331400;
-    color: #ffffff;
+body, html {
+    background-color: #e8f3fa;
+    color: #333;
     font-family: 'Play', sans-serif;
     font-weight: 300;
-    font-size: 15px;
-    text-rendering: optimizeLegibility;
+    font-size: 16px;
+    line-height: 1.6;
     overflow-x: hidden;
 }
 
-.clearfix {zoom: 1}
-.clearfix:after {                                             /*clear float after an element*/
+h2 {
+    font-size: 2em; /* or you can use px */
+}
+
+p {
+    font-size: 1.2em; /* or you can use px */
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
     content: '.';
     clear: both;
     display: block;
     height: 0;
     visibility: hidden;
-    margin: 0;
 }
 
 /* -----------------------------------------------------------------------*/
@@ -57,15 +67,20 @@ a:active {
     border: 5px solid #cccccc;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
     margin-top: 1em;
-    margin-bottom: 1em;    
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;    
+    border-radius: 7px;
 }
 
-.img-preview>div {
+.img-preview > div {
     width: 100%;
     height: 100%;
-    background-size: 256px 256px;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 7px;
 }
 
 .img-preview:hover {
@@ -89,6 +104,8 @@ input[type="file"] {
     transition: all .4s;
     cursor: pointer;
     border: 2px solid #cccccc;
+    font-size: 1.2em;
+    border-radius: 6px;
 }
 
 .upload-label:hover{
@@ -111,12 +128,72 @@ input[type="file"] {
     100% { transform: rotate(360deg); }
 }
 
-.very_main{
+
+/* Container */
+.very_main {
+    max-width: 1100px;
     margin: auto;
-    text-align: center;
+    padding: 20px;
 }
+
 
 .final_word{
     position: relative;
     margin-top: 12px;
+}
+
+.main-header {
+    background: #50b3a2;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 6px
+}
+
+.intro {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* File Upload Section */
+.file-upload {
+    background: #fff;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Image Display Section */
+.image-display {
+    background: #fff;
+    margin: 20px 0;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+.btn {
+    padding: 14px 40px;
+    background: #50b3a2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 6px;
+}
+
+.btn:hover {
+    background: #333;
+}
+
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: #fff;
 }

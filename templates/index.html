@@ -14,54 +14,54 @@
     <div class="very_main">
 
         <header>
-            <div class="top_frame">
-                <h1>Diagnosis for the Prediction of Knee Osteoarthritis Using Deep Learning</h1>
-            </div>
+            <header class="main-header">
+                <h1>Final Year Project by S.K Senura Deshan Perera | CB008868</h1>
+            </header>
         </header>
 
-        {% extends "base.html" %} {% block content %}
+        {% extends "base.html" %}
 
-        <h2>Implemented by Keras and Tensorflow</h2>
+        {% block content %}
+        <div class="very_main">
+            <header class="main-header">
+                <h1>Knee Osteoarthritis Detection and Severity Grading from an Explainable AI Perspective</h1>
+            </header>
 
-        <p class="description">
-            Choose your Knee X-Ray visual file and click Predict to get your diagnosis.
-        </p>
+            <section class="intro">
+                <h2>Implemented by Keras and Tensorflow</h2>
+                <p class="description">
+                    Choose your Knee X-Ray visual file and click Predict to get your diagnosis.
+                </p>
+            </section>
 
-        <div>
-            <form id="upload-file" method="post" enctype="multipart/form-data">
-                <label for="imageUpload" class="upload-label">
-                    Select your Knee X-Ray Visual
-                </label>
-                <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-            </form>
+            <section class="file-upload">
+                <form id="upload-file" method="post" enctype="multipart/form-data">
+                    <label for="imageUpload" class="upload-label">Select your Knee X-Ray Image</label>
+                    <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+                </form>
+            </section>
 
-            <div class="image-section" style="display:none;">
-                <div class="img-preview">
-                    <div id="imagePreview">
+            <section class="image-display">
+                <div class="image-section" style="display:none;">
+                    <div class="img-preview">
+                        <div id="imagePreview"></div>
                     </div>
+                    <button type="button" class="btn btn-predict" id="btn-predict">Predict !</button>
                 </div>
-                <div>
-                    <button type="button" class="upload-label" id="btn-predict">Predict!</button>
-                </div>
-            </div>
+                <div class="loader" style="display:none;"></div>
+                <h3 id="result"><span> </span></h3>
+            </section>
 
-            <div class="loader" style="display:none;"></div>
-
-            <h3 id="result">
-                <span> </span>
-            </h3>
-
+            <footer class="main-footer">
+                <p class="final_word">
+                    Prepared by S.K.S.D Perera |
+                    E-mail: <a href="mailto:cb008868@students.apiit.lk">cb008868@students.apiit.lk</a><br/>
+                    Mentor: Dr.Kasun Karunanayake<br/>
+                    Project Coordinator: Mr. Guhanathan Poravi
+                </p>
+            </footer>
         </div>
-
-        <p class="final_word">
-            Prepared by <a href="http://buffml.com/" target="_blank">BuffMl</a>.</br>
-            E-mail: contact@buffml.com</br>
-            <i>Complete Flask App</i>, 2021
-        </p>
-
-    </div>
-
-    {% endblock %}
+        {% endblock %}
 
 </body>
 

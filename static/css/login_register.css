@@ -1,0 +1,82 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f3fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Login & Register Styles */
+.auth-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    background-color: #ffffff;
+    margin: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form {
+    width: 45%;
+    margin: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form input {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.auth-form button {
+    padding: 10px 20px;
+    background: #50b3a2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Flash Message Styles */
+.flash-messages {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    font-weight: bold;
+    text-align: center;
+}
+
+.flash-messages ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flash-messages li {
+    padding: 10px;
+    margin: 5px;
+    background-color: #f44336; /* Red background by default */
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.flash-success {
+    background-color: #4CAF50; /* Green */
+}
+
+.flash-info {
+    background-color: #2196F3; /* Blue */
+}
+
+.flash-warning {
+    background-color: #ff9800; /* Orange */
+}

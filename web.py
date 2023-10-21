@@ -8,8 +8,94 @@ from gradcam_utils import grad_cam
 from integrated_gradients_utils import compute_and_visualize_integrated_gradients
 from lime_utils_1 import compute_and_visualize_lime  # Replace with your actual function name
 
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+
+
+
+
+app.secret_key = "supersecretkey"
+
+# Initialize Login Manager
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+# Dummy dictionary to store user data - replace with your database
+users = {
+    'admin@gmail.com': {'password': generate_password_hash('admin123')}
+}
+class User(UserMixin):
+    pass
+
+@login_manager.user_loader
+def user_loader(email):
+    if email not in users:
+        return
+    user = User()
+    user.id = email
+    return user
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+    
+    email = request.form['email']
+    password = request.form['password']
+
+    if email in users:
+        flash('Email address already registered')
+        return redirect(url_for('register'))
+
+    users[email] = {'password': generate_password_hash(password)}
+
+    print(users)
+    
+    flash('Successfully registered')
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    
+    email = request.form['email']
+    password = request.form['password']
+
+    print(f"Entered email: {email}, Entered password: {password}")
+    print(f"Current users: {users}")
+
+    if email in users:
+        stored_hashed_password = users[email]['password']
+        is_correct_password = check_password_hash(stored_hashed_password, password)
+
+        if is_correct_password:
+            print("Password is correct.")
+            user = User()
+            user.id = email
+            login_user(user)
+            flash('Login Successful !')
+            return redirect(url_for('index'))  # Redirect to index after successful login
+        else:
+            flash("Password is incorrect.")
+    else:
+        flash("Email not found.")
+
+    return redirect(url_for('login'))
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+
+
+
+
 
 dic = {0: 'Normal', 1: 'Doubtful', 2: 'Mild', 3: 'Moderate', 4: 'Severe'}
 img_size = 224
@@ -40,8 +126,9 @@ def predict_label(img_path):
     return dic[p[0]]
 
 
-@app.route("/", methods=['GET', 'POST'])
-def main():
+@app.route("/index", methods=['GET', 'POST'])
+@login_required
+def index():
     return render_template("index.html")
 
 
@@ -71,7 +158,7 @@ def upload():
         # lime_explanation = generate_lime_explanation(img_path, model)  # Replace with your actual function name
         # print(p, lime_explanation)
         print(p)
-        return str(p).lower()
+        return str(p)
 
 
 if __name__ == '__main__':
