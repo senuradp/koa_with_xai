@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/results.css') }}"
+    />
+    <title>Result</title>
+  </head>
+  <body>
+    
+    <div class="main-header">
+        <h1>Model Decision Report</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="box">
+                <h1>Uploaded X-Ray</h1>
+                <img
+                    class="img_grad"
+                    src="{{ original_image_url }}"
+                    alt="X-Ray image"
+                />
+            </div>
+            <div class="box">
+                <h1>Prediction</h1>
+                <p>
+                    <br>
+                    <br>
+                    <b>Prediction Outcome:</b> The AI model has analyzed the uploaded X-ray.
+                    <br>
+                    <br>
+                    <b>Diagnosis:</b> A diagnosis corresponding to <b>{{ prediction }}</b> has been determined.
+                    <br>
+                    <br>
+                    <b>Assessment Scale:</b> The diagnosis is based on the Kellgren-Lawrence (KL) Scale, a widely-accepted grading system for assessing the severity of osteoarthritis.
+                    <br>
+                    <br>
+                    <b>KL Scale</b> : [0: Normal, 1: Doubtful , 2: Mild , 3: Moderate , 4: Severe]
+                </p>
+            </div>
+
+        </div>
+        
+        <div class="row">
+
+            <div class="box">
+                <h1>Grad-Cam Result</h1>
+                <img
+                    src="{{ grad_cam_image_url }}"
+                    alt="Grad-Cam Result"
+                />
+            </div>
+            <div class="box">
+                <h1>Grad-CAM (Gradient-weighted Class Activation Mapping)</h1>
+                <p>
+                    <br>
+                    <br>
+                    <b>What it Does: </b> Grad-CAM offers a visual heatmap overlay on the X-ray to point out regions of interest.
+                    <br>
+                    <br>
+                    <b>How it Works: </b> The technique uses internal computations of our AI model to understand what features are crucial for making a decision and then visually represents them as a heatmap.
+                    <br>
+                    <br>
+                    <b>Why It's Useful:</b>  A quick glance at the heatmap can give you an idea of where to focus your attention and may help you quickly assess the severity of osteoarthritis.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="box">
+                <h1>Integrated Gradients Result</h1>
+                <img
+                    src="{{ integrated_gradients_image_url }}"
+                    alt="Integrated Gradients Result"
+                />
+            </div>
+
+            <div class="box">
+                <h1>Integrated Gradients</h1>
+                <p>
+                    <br>
+                    <br>
+                    <b>What it Does: </b> This method provides a very detailed, pixel-level explanation of how each part of an X-ray contributes to the diagnosis.
+                    <br>
+                    <br>
+                    <b>How it Works: </b> It calculates the influence of each individual pixel from the X-ray image on the diagnosis by comparing it to a baseline image (usually a blank image).
+                    <br>
+                    <br>
+                    <b>Why It's Useful:</b> This provides an in-depth understanding of the diagnosis. Integrated Gradients offer the most granular level of explanation, right down to individual pixels. The feature can be particularly useful for doctors who are interested in the fine details of the X-ray, including edge structures that are sometimes highlighted.
+                    </p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="box triple">
+                
+                <h1>LIME Result</h1>
+                <p>
+                    <br>
+                    <b>What it Does: </b> LIME lets you see which areas of an X-ray image were most important in making a specific diagnosis. It's like having a second opinion that points out the key features to notice.
+                    <br>
+                    <br>
+                    <b>How it Works: </b> The system generates variations of the original X-ray and observes how the diagnosis changes. Then it highlights the regions that are consistently influencing the outcome.
+                    <br>
+                    <br>
+                    <b>Why It's Useful: </b> Knowing the focal points in each image can enhance your understanding of the diagnosis, allowing you to corroborate it with your clinical expertise.
+                    <br>
+                    <br>
+                </p>
+                <div class="lime-images">
+                    <img src="{{ lime_dictionary.lime_image_1 }}" alt="LIME Result 1" />
+                    <img src="{{ lime_dictionary.lime_image_2 }}" alt="LIME Result 2" />
+                    <img src="{{ lime_dictionary.lime_image_3 }}" alt="LIME Result 3" />
+                </div>
+
+                <h3>Text Explanation</h3>
+                <p>{{ lime_dictionary.text_explanation }}</p>
+
+            </div>
+        </div>
+
+        
+    </div>
+    <div class="main-header">
+        <h3>Final Year Project by S.K Senura Deshan Perera | CB008868</h3>
+    </div>
+  </body>
+</html>

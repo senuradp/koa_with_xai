@@ -44,6 +44,7 @@ $(document).ready(function () {
             success: function (data) {
                 // Get and display the result
                 $('.loader').hide();
+                window.location.href = "/results";
                 $('#result').fadeIn(600);
                 $('#result').text(' Diagnosis of knee status:  ' + data);
                 console.log('Success!');

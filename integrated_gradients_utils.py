@@ -58,4 +58,10 @@ def compute_and_visualize_integrated_gradients(img_path, model):
     normalized_ig_uint8 = (normalized_ig_numpy * 255).astype('uint8')
 
     # Save the integrated gradients
-    cv2.imwrite(f'integrated_gradient_outputs/integrated_gradients_{img_path.split("/")[-1]}', cv2.cvtColor(normalized_ig_uint8, cv2.COLOR_RGB2BGR))
+    # cv2.imwrite(f'integrated_gradient_outputs/integrated_gradients_{img_path.split("/")[-1]}', cv2.cvtColor(normalized_ig_uint8, cv2.COLOR_RGB2BGR))
+
+    output_path = f'integrated_gradient_outputs/integrated_gradients_{img_path.split("/")[-1]}'
+    cv2.imwrite(output_path, cv2.cvtColor(normalized_ig_uint8, cv2.COLOR_RGB2BGR))
+    return output_path
+
+    

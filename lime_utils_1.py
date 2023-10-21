@@ -23,6 +23,9 @@ def compute_and_visualize_lime(image_path, model):
     # Load a specific image (replace with your image path)
     image_path = image_path
 
+    # Prepare a dictionary to hold the outputs
+    output_dict = {}
+
 ################################################ Lime Visualization ################################################ 
 
     # Label mapping
@@ -87,8 +90,11 @@ def compute_and_visualize_lime(image_path, model):
     # Convert the image from [0,1] to [0,255] and to uint8
     image_with_boundaries = (image_with_boundaries * 255).astype('uint8')
 
-    # Save the image
-    cv2.imwrite(f'lime_outputs/lime_1_{image_path.split("/")[-1]}', cv2.cvtColor(image_with_boundaries, cv2.COLOR_RGB2BGR))
+    # Save LIME Image 1
+    # cv2.imwrite(f'lime_outputs/lime_1_{image_path.split("/")[-1]}', cv2.cvtColor(image_with_boundaries, cv2.COLOR_RGB2BGR))
+    lime_output_1 = f'lime_outputs/lime_1_{image_path.split("/")[-1]}'
+    cv2.imwrite(lime_output_1, cv2.cvtColor(image_with_boundaries, cv2.COLOR_RGB2BGR))
+    output_dict['lime_image_1'] = lime_output_1
 
 ################################################ Text Generation ################################################ 
 
@@ -132,6 +138,8 @@ def compute_and_visualize_lime(image_path, model):
 
     text_explanation = generate_text_explanation(lime_output, top_label)
     print("Generated Text Explanation:", text_explanation)
+    # Save text explanation
+    output_dict['text_explanation'] = text_explanation
 
 ################################################ Influential Area Marking ################################################ 
 
@@ -157,7 +165,12 @@ def compute_and_visualize_lime(image_path, model):
     highlighted_img_uint8 = (highlighted_img * 255).astype('uint8')
 
     # Save the image using OpenCV (note the conversion from RGB to BGR)
-    cv2.imwrite(f'lime_outputs/lime_2_{image_path.split("/")[-1]}', cv2.cvtColor(highlighted_img_uint8, cv2.COLOR_RGB2BGR))
+    # cv2.imwrite(f'lime_outputs/lime_2_{image_path.split("/")[-1]}', cv2.cvtColor(highlighted_img_uint8, cv2.COLOR_RGB2BGR))
+
+    # Save LIME Image 2
+    lime_output_2 = f'lime_outputs/lime_2_{image_path.split("/")[-1]}'
+    cv2.imwrite(lime_output_2, cv2.cvtColor(highlighted_img_uint8, cv2.COLOR_RGB2BGR))
+    output_dict['lime_image_2'] = lime_output_2
 
 
 ################################################ Segment Marking ################################################ 
@@ -190,15 +203,22 @@ def compute_and_visualize_lime(image_path, model):
         centroid = coords.mean(axis=0)
         
         # Annotate the image with the segment index
-        ax.text(centroid[1], centroid[0], str(segment_index), color='white', fontsize=12, ha='center', va='center')
+        ax.text(centroid[1], centroid[0], str(segment_index), color='black', fontsize=12, ha='center', va='center')
 
     # Display the image and annotations on the axes
     ax.imshow(highlighted_img)
     ax.axis('off')
 
-    # Save the image using matplotlib's savefig
-    save_path = f'lime_outputs/lime_3_{image_path.split("/")[-1]}'
-    fig.savefig(save_path, bbox_inches='tight', pad_inches=0)
+    # # Save the image using matplotlib's savefig
+    # save_path = f'lime_outputs/lime_3_{image_path.split("/")[-1]}'
+    # fig.savefig(save_path, bbox_inches='tight', pad_inches=0)
+
+    # Save LIME Image 3
+    lime_output_3 = f'lime_outputs/lime_3_{image_path.split("/")[-1]}'
+    fig.savefig(lime_output_3, bbox_inches='tight', pad_inches=0)
+    output_dict['lime_image_3'] = lime_output_3
 
     # Close the figure to free up memory
     plt.close(fig)
+
+    return output_dict

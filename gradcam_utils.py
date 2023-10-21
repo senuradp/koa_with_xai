@@ -60,9 +60,16 @@ def grad_cam(image_path, loaded_model, img_size=(224, 224), visualize_layer='blo
 
     # Generate the Grad-CAM visualization
     custom_img_with_gradcam = visualize_grad_cam(loaded_model, custom_img, layer_name, class_index)
-
+    
     # Save the Grad-CAM image to 'uploads' folder
-    cv2.imwrite(f'grad_cam_outputs/grad_cam_{image_path.split("/")[-1]}', custom_img_with_gradcam)
+    # cv2.imwrite(f'grad_cam_outputs/grad_cam_{image_path.split("/")[-1]}', custom_img_with_gradcam)
+
+    # Save the image
+    output_path = f'grad_cam_outputs/grad_cam_{image_path.split("/")[-1]}'
+    cv2.imwrite(output_path, custom_img_with_gradcam)
+    
+    # Return the output path
+    return output_path
 
     # Display the original image and Grad-CAM visualization
     # fig, axes = plt.subplots(1, 2, figsize=(12, 6))
