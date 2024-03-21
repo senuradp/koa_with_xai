@@ -1,4 +1,4 @@
-# Knee Osteoarthritis Detection Using X-Ray Images from Explainable AI (XAI) Perspective
+# Knee Osteoarthritis Detection Using X-Ray Images from an Explainable AI (XAI) Perspective
 
 [![My Skills](https://skillicons.dev/icons?i=html,css,js,py,git,github,flask,anaconda,opencv,tensorflow,pycharm,npm,pkl,sklearn)](https://skillicons.dev)
 
